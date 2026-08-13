@@ -1,90 +1,148 @@
-# 🔵 BlueGuard SOC Portfolio
+&lt;div align="center"&gt;
 
-> **Aspiring SOC Analyst | Blue Team Certified | Cisco Defense Certified**
+# 🔵 Guruprasad S
+## SOC Analyst | Blue Team Certified | Cisco Defense Certified
 
-Welcome to my cybersecurity portfolio! This repository contains hands-on projects, SOC playbooks, security SOPs, detection rules, and incident response documentation I've created to demonstrate my skills in Security Operations.
+[![Live Dashboard](https://img.shields.io/badge/🔗%20VIEW%20LIVE%20SOC%20DASHBOARD-Click%20Here-2196F3?style=for-the-badge&logo=github)](https://guru-prasad7.github.io/BlueGuard-SOC-Portfolio/dashboard.html)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/guru-prasad-8862b1268/)
+[![Email](https://img.shields.io/badge/Email-Contact-D14836?style=for-the-badge&logo=gmail)](mailto:guruprasad84453@gmail.com)
 
----
-
-## 🛡️ About Me
-
-- 🎓 **Blue Team Level 1 (BTL1) Certified** — Defensive security & incident response
-- 🎓 **Cisco Defense System Certified** — Network security & threat defense
-- 🔍 Passionate about **SOC operations, threat detection, and incident response**
-- 📍 Based in Kerala, India | Open to **SOC Analyst / Security Analyst** roles
+&lt;/div&gt;
 
 ---
 
-## 📂 Repository Structure
+## 👤 About Me
 
-| Folder | Description |
-|--------|-------------|
-| `01-SOC-Playbooks` | Step-by-step incident response playbooks |
-| `02-Security-SOPs` | Security Standard Operating Procedures |
-| `03-Detection-Rules` | SIEM detection rules (Sigma, Splunk SPL) |
-| `04-Incident-Response-Reports` | Sample IR reports with timeline analysis |
-| `05-Network-Security-Configs` | Cisco ASA/Firepower & ACL configurations |
-| `06-Threat-Intelligence` | IOC collections & threat actor profiles |
-| `07-Certifications` | Certification badges & credentials |
+&gt; Aspiring **SOC Analyst** with a strong foundation in **defensive security, incident response, and network defense**. Passionate about threat detection, log analysis, and building automated security solutions. Eager to contribute to a Security Operations Center and grow into a skilled cybersecurity professional.
+
+| | |
+|:---|:---|
+| **Name** | Guruprasad S |
+| **Degree** | B.Tech Artificial Intelligence & Data Science (AI&DS) |
+| **College** | M.Kumarasamy College of Engineering |
+| **CGPA** | 6.5 |
+| **Location** | Kerala, India |
+| **Open To** | SOC Analyst / Security Analyst / Blue Team Roles |
+
+---
+
+## 🎓 Certifications
+
+&lt;div align="center"&gt;
+
+| Certification | Issuer | Status |
+|:--|:--:|:--:|
+| **Blue Team Level 1 (BTL1)** | Security Blue Team | ✅ Certified |
+| **Cisco Defense System** | Cisco | ✅ Certified |
+
+&lt;/div&gt;
 
 ---
 
 ## 🚀 Featured Projects
 
-### 1. Phishing Incident Response Playbook
-A complete playbook covering detection → containment → eradication → recovery for phishing attacks.
+### 1. 🎯 Live SOC Threat Hunting Dashboard
+**Interactive security operations dashboard** built with HTML, CSS, and Chart.js. Simulates real-time SOC monitoring with:
+- Live attack origin tracking
+- Alert severity distribution
+- MITRE ATT&CK technique mapping
+- Response time analytics
 
-### 2. SIEM Detection Rules
-Custom Sigma rules for detecting:
-- Brute force attacks
-- Lateral movement
-- Data exfiltration
-- Privilege escalation
-
-### 3. Cisco Network Security Hardening
-ACL configurations, zone-based firewall policies, and IPS/IDS deployment guides.
-
-### 4. Ransomware IR Report
-A detailed incident response report simulating a Conti ransomware attack with full timeline.
+**🔗 [View Live Dashboard](https://guru-prasad7.github.io/BlueGuard-SOC-Portfolio/dashboard.html)**
 
 ---
 
-## 🛠️ Tools & Technologies
-
-![SIEM](https://img.shields.io/badge/SIEM-Splunk%20%7C%20ELK-blue)
-![EDR](https://img.shields.io/badge/EDR-CrowdStrike%20%7C%20SentinelOne-green)
-![Firewall](https://img.shields.io/badge/Firewall-Cisco%20ASA%20%7C%20Firepower-orange)
-![Cloud](https://img.shields.io/badge/Cloud-AWS%20Security-lightblue)
-![OS](https://img.shields.io/badge/OS-Linux%20%7C%20Windows-yellow)
+### 2. 📧 Phishing Kill Chain Analysis
+End-to-end phishing incident investigation using:
+- **Any.Run** for dynamic malware analysis
+- **VirusTotal** for threat intelligence
+- Complete kill chain documentation from delivery to execution
 
 ---
 
-
-
----
-
-## 🚀 Hands-On Projects
-
-This portfolio includes **4 real-world projects** that demonstrate practical cybersecurity skills:
-
-| # | Project | What It Shows | Difficulty |
-|---|---------|--------------|------------|
-| 1 | **Phishing Kill Chain Analysis** | End-to-end phishing investigation using Any.Run, VirusTotal | Easy |
-| 2 | **Python SOC Automation** | Automated log analysis & threat detection with Python | Easy-Medium |
-| 3 | **Network Security Audit** | Vulnerability scanning with Nmap & OpenVAS | Easy |
-| 4 | **Threat Hunting Dashboard** | Interactive SOC dashboard with HTML/CSS/JS | Easy |
-
-> **All projects use FREE tools** — no expensive software needed!
-
-See `08-Projects/` folder for complete project files.
-
-## 📞 Connect With Me
-
-- 💼 [LinkedIn](https://linkedin.com/in/yourprofile)
-- 📧 your.email@example.com
-- 🌐 Portfolio: [yourportfolio.com](https://yourportfolio.com)
+### 3. 🐍 Python SOC Automation Scripts
+Automated security operations tools including:
+- Log parsing and anomaly detection
+- Threat indicator extraction
+- Automated alert triage scripts
 
 ---
 
-> ⚠️ **Disclaimer:** All content in this repository is for educational and portfolio purposes. Some scenarios are simulated for demonstration.
+### 4. 🛡️ Network Security Audit
+Comprehensive network vulnerability assessment using:
+- **Nmap** for port scanning and service enumeration
+- **OpenVAS** for vulnerability scanning
+- Hardening recommendations and remediation reports
 
+---
+
+## 📂 Portfolio Repository Structure
+
+---
+
+## 🛠️ Technical Skills
+
+<div align="center">
+
+### SIEM & Monitoring
+![Splunk](https://img.shields.io/badge/Splunk-000000?style=flat&logo=splunk)
+![ELK Stack](https://img.shields.io/badge/ELK%20Stack-005571?style=flat&logo=elastic)
+![Wireshark](https://img.shields.io/badge/Wireshark-1679A7?style=flat&logo=wireshark)
+
+### Endpoint & Network Security
+![Cisco](https://img.shields.io/badge/Cisco-1BA0D7?style=flat&logo=cisco)
+![CrowdStrike](https://img.shields.io/badge/CrowdStrike-E31937?style=flat)
+![SentinelOne](https://img.shields.io/badge/SentinelOne-8C00FF?style=flat)
+
+### Threat Intelligence & Analysis
+![VirusTotal](https://img.shields.io/badge/VirusTotal-394EFF?style=flat)
+![AnyRun](https://img.shields.io/badge/Any.Run-FF6B6B?style=flat)
+![MITRE ATT&CK](https://img.shields.io/badge/MITRE%20ATT%26CK-BC0C0E?style=flat)
+
+### Programming & Scripting
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python)
+![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat&logo=gnu-bash)
+![SQL](https://img.shields.io/badge/SQL-4479A1?style=flat&logo=mysql)
+
+### Operating Systems
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat&logo=linux)
+![Windows](https://img.shields.io/badge/Windows-0078D6?style=flat&logo=windows)
+
+</div>
+
+---
+
+## 📊 Portfolio Stats
+
+| Category | Count | Demonstrates |
+|:---------|:-----:|:-------------|
+| SOC Playbooks | 2 | Structured incident response thinking |
+| Security SOPs | 2 | Documentation & compliance knowledge |
+| Detection Rules | 5 | SIEM engineering & threat detection |
+| IR Reports | 1 | Timeline analysis & communication |
+| Network Configs | 2 | Cisco expertise & network defense |
+| Threat Intel | 1 | IOC analysis & threat hunting |
+| **Total Artifacts** | **13** | **Complete SOC Analyst skillset** |
+
+---
+
+## 📞 Let's Connect
+
+I'm actively looking for **SOC Analyst** and **Security Analyst** opportunities where I can apply my skills in threat detection, incident response, and security operations.
+
+<div align="center">
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Guru%20Prasad-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/guru-prasad-8862b1268/)
+[![Email](https://img.shields.io/badge/Email-guruprasad84453@gmail.com-D14836?style=for-the-badge&logo=gmail)](mailto:guruprasad84453@gmail.com)
+
+</div>
+
+---
+
+> ⚠️ **Disclaimer:** All content in this repository is for educational and portfolio demonstration purposes. Some scenarios are simulated to showcase practical cybersecurity skills.
+
+<div align="center">
+
+**⭐ If you find this portfolio useful, consider starring the repository!**
+
+</div>
