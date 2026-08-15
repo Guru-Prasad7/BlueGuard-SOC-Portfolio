@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOC Playbook | Guruprasad S</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#030508;--panel:#080c14;--card:#0d111f;--border:#152033;--cyan:#00e5ff;--green:#00d26a;--red:#ff3860;--yellow:#ffcc00;--text:#e2e8f0;--dim:#8b95a8;--fade:#4a5568;--font-mono:'JetBrains Mono',monospace;--font-body:'Inter',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.7}
+.container{max-width:900px;margin:0 auto;padding:0 24px}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:16px 0;margin-bottom:30px}
+header .container{display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:var(--font-mono);font-weight:700;color:var(--cyan);font-size:1.1rem;text-decoration:none}
+.back-btn{color:var(--dim);text-decoration:none;font-size:0.85rem;font-family:var(--font-mono);transition:color 0.2s}
+.back-btn:hover{color:var(--cyan)}
+
+.doc-header{text-align:center;margin-bottom:40px;padding:30px;background:var(--card);border:1px solid var(--border);border-radius:12px;border-top:3px solid var(--cyan)}
+.doc-header h1{font-family:var(--font-mono);font-size:1.8rem;margin-bottom:8px}
+.doc-header .meta{color:var(--dim);font-size:0.85rem;font-family:var(--font-mono)}
+
+.section{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:28px;margin-bottom:20px}
+.section h2{font-family:var(--font-mono);font-size:1.05rem;color:var(--cyan);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.section p{color:var(--dim);font-size:0.9rem;margin-bottom:12px}
+
+.step{display:flex;gap:16px;margin-bottom:20px;padding:16px;background:var(--panel);border:1px solid var(--border);border-radius:8px;transition:all 0.3s}
+.step:hover{border-color:rgba(0,229,255,0.2)}
+.step-num{width:32px;height:32px;background:var(--cyan-dim);border:1px solid rgba(0,229,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:0.8rem;color:var(--cyan);font-weight:700;flex-shrink:0}
+.step-content h4{font-size:0.95rem;margin-bottom:6px}
+.step-content p{color:var(--dim);font-size:0.85rem;margin-bottom:0}
+.step-content ul{color:var(--dim);font-size:0.85rem;margin-left:18px;margin-top:6px}
+.step-content li{margin-bottom:4px}
+
+.code-block{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:14px 16px;font-family:var(--font-mono);font-size:0.78rem;color:var(--dim);overflow-x:auto;margin:10px 0}
+.code-block .cmd{color:var(--cyan)}
+
+.escalation-box{background:rgba(255,56,96,0.05);border:1px solid rgba(255,56,96,0.2);border-radius:8px;padding:16px;margin-top:16px}
+.escalation-box h4{color:var(--red);font-size:0.9rem;margin-bottom:8px}
+.escalation-box ul{color:var(--dim);font-size:0.85rem;margin-left:18px}
+
+.personal-note{background:rgba(0,210,106,0.05);border:1px solid rgba(0,210,106,0.2);border-radius:8px;padding:16px;margin-top:16px}
+.personal-note h4{color:var(--green);font-size:0.9rem;margin-bottom:8px}
+.personal-note p{color:var(--dim);font-size:0.85rem}
+
+footer{text-align:center;padding:24px 0;border-top:1px solid var(--border);color:var(--fade);font-size:0.78rem;font-family:var(--font-mono);margin-top:20px}
+</style>
+</head>
+<body>
+<header><div class="container"><a href="index.html" class="logo">◉ SOC_PLAYBOOK</a><a href="index.html" class="back-btn">← Back to Portfolio</a></div></header>
+
+<div class="container">
+  <div class="doc-header">
+    <h1>SOC Playbook — Phishing Alert Triage</h1>
+    <div class="meta">PB-PHISH-001 | Author: Guruprasad S | Version: 1.0 | Classification: INTERNAL</div>
+  </div>
+
+  <div class="section">
+    <h2>🎯 Why I Wrote This</h2>
+    <p>During my BTL1 training, I realized that when you're new in a SOC, you panic when a phishing alert comes in. You don't know what to check first, what matters, and what can wait. I wrote this playbook for my future self — and any other L1 analyst who needs a checklist when their brain freezes.</p>
+    <p><strong>Target Audience:</strong> L1/L2 SOC Analysts (like me)<br><strong>SLA:</strong> Initial triage within 15 minutes, containment within 1 hour<br><strong>Priority:</strong> P2 (HIGH) — Business hours, P1 (CRITICAL) — After hours if executive targeted</p>
+  </div>
+
+  <div class="section">
+    <h2>📋 My Step-by-Step Procedure</h2>
+
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h4>Alert Acknowledgment & Initial Assessment</h4>
+        <p>Acknowledge the alert in the SIEM within 15 minutes. Gather initial context:</p>
+        <ul>
+          <li>Alert source (Email Gateway, EDR, User Report) — user reports are often more accurate than automated alerts</li>
+          <li>Recipient email address and department — Finance/HR = higher priority</li>
+          <li>Sender address and subject line — check for urgency words like "IMMEDIATE ACTION REQUIRED"</li>
+          <li>Presence of attachments or links — attachments are worse than links (usually)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h4>Email Header Analysis</h4>
+        <p>Extract and analyze email headers to determine true origin. I used to skip this step until I learned how easy spoofing is:</p>
+        <ul>
+          <li>Check SPF, DKIM, DMARC alignment — if DMARC fails, be extra suspicious</li>
+          <li>Verify "Return-Path" vs "From" address — mismatch = red flag</li>
+          <li>Inspect X-Originating-IP and Received headers — trace the real path</li>
+          <li>Check for lookalike domains and typosquats — "company-finance.com" vs "companyfinance.com"</li>
+        </ul>
+        <div class="code-block">
+          <span class="cmd">$ dig TXT company-finance.com</span><br>
+          <span class="cmd">$ whois 203.78.12.5</span><br>
+          <span class="cmd">$ nslookup -type=MX company-finance.com</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h4>Attachment & Link Analysis</h4>
+        <p>DO NOT open attachments on production systems. I learned this the hard way in a lab (thankfully it was a VM). Use sandbox:</p>
+        <ul>
+          <li>Submit attachment to Any.Run / VirusTotal / Hybrid Analysis — I prefer Any.Run for behavioral analysis</li>
+          <li>Check file hash against threat intelligence feeds — AlienVault OTX, Abuse.ch</li>
+          <li>Analyze URLs with URLScan.io before accessing — never click directly</li>
+          <li>Document file type, size, and creation timestamp — helps with timeline later</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <h4>User Impact Assessment</h4>
+        <p>Determine if the recipient interacted with the email. This is where I used to waste time — now I check logs first, ask user later:</p>
+        <ul>
+          <li>Check proxy logs for URL clicks — look for 200 OK responses to suspicious domains</li>
+          <li>Review EDR logs for file execution — check for child processes spawned by Office apps</li>
+          <li>Interview user: "Did you open the attachment?" — be specific, users say "no" when they mean "I closed it immediately"</li>
+          <li>Check mailbox rules or forwarding configured — attackers love setting up forwarding rules</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">05</div>
+      <div class="step-content">
+        <h4>Containment Actions</h4>
+        <p>If malicious intent confirmed, execute immediate containment. I prioritize based on blast radius:</p>
+        <ul>
+          <li>Delete email from all mailboxes (eDiscovery search) — stops spread to other users</li>
+          <li>Block sender domain at email gateway — prevents follow-up emails</li>
+          <li>Block URLs at proxy/firewall — kills the delivery channel</li>
+          <li>Isolate affected endpoint if file was executed — assume compromise until proven otherwise</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">06</div>
+      <div class="step-content">
+        <h4>Documentation & Closure</h4>
+        <p>Complete incident ticket with details. I hate documentation but it's non-negotiable:</p>
+        <ul>
+          <li>Full timeline of events — include every timestamp you can find</li>
+          <li>IOCs extracted (IPs, domains, hashes) — format them for easy copy-paste to threat intel</li>
+          <li>Screenshots of analysis results — Any.Run reports, VirusTotal results</li>
+          <li>Actions taken and lessons learned — what worked, what didn't, what to do faster next time</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>🚨 When to Escalate</h2>
+    <div class="escalation-box">
+      <h4>Escalate to L3 / Incident Response Team if:</h4>
+      <ul>
+        <li>Executive or C-level employee targeted (Whaling) — these need immediate attention</li>
+        <li>Multiple users clicked link or opened attachment — indicates successful campaign, not isolated</li>
+        <li>C2 communication detected from internal host — this is no longer just phishing, it's active compromise</li>
+        <li>Ransomware or credential harvester identified — don't try to handle alone as L1</li>
+        <li>Business-critical system compromised — domain controllers, database servers, etc.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="personal-note">
+    <h4>📝 Why This Playbook Matters to Me</h4>
+    <p>I wrote this because during my first phishing lab, I spent 45 minutes just figuring out where to start. A playbook gives you structure when you're panicking. It's not perfect — I'm sure senior analysts would add more steps — but it's a solid foundation for a fresher. I'll keep updating it as I learn.</p>
+  </div>
+</div>
+
+<footer><div class="container">SOC Playbook | Guruprasad S | SOC Analyst Portfolio</div></footer>
+</body>
+</html>

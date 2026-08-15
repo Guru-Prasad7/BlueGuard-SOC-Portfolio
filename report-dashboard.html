@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Project Analysis | Guruprasad S</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#030508;--panel:#080c14;--card:#0d111f;--border:#152033;--cyan:#00e5ff;--green:#00d26a;--red:#ff3860;--yellow:#ffcc00;--text:#e2e8f0;--dim:#8b95a8;--fade:#4a5568;--font-mono:'JetBrains Mono',monospace;--font-body:'Inter',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.7}
+.container{max-width:900px;margin:0 auto;padding:0 24px}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:16px 0;margin-bottom:30px}
+header .container{display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:var(--font-mono);font-weight:700;color:var(--cyan);font-size:1.1rem;text-decoration:none}
+.back-btn{color:var(--dim);text-decoration:none;font-size:0.85rem;font-family:var(--font-mono);transition:color 0.2s}
+.back-btn:hover{color:var(--cyan)}
+
+.doc-header{text-align:center;margin-bottom:40px;padding:30px;background:var(--card);border:1px solid var(--border);border-radius:12px;border-top:3px solid var(--cyan)}
+.doc-header h1{font-family:var(--font-mono);font-size:1.8rem;margin-bottom:8px}
+.doc-header .meta{color:var(--dim);font-size:0.85rem;font-family:var(--font-mono)}
+
+.section{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:28px;margin-bottom:20px}
+.section h2{font-family:var(--font-mono);font-size:1.05rem;color:var(--cyan);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.section p{color:var(--dim);font-size:0.9rem;margin-bottom:12px}
+.section ul{margin-left:20px;color:var(--dim);font-size:0.9rem}
+.section ul li{margin-bottom:8px}
+
+.code-block{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:16px;font-family:var(--font-mono);font-size:0.78rem;color:var(--dim);overflow-x:auto;margin:12px 0}
+.code-block .cmd{color:var(--cyan)}
+
+.note{background:rgba(0,229,255,0.05);border:1px solid rgba(0,229,255,0.2);border-radius:8px;padding:16px;margin-top:12px}
+.note h4{color:var(--cyan);font-size:0.9rem;margin-bottom:8px}
+.note p{color:var(--dim);font-size:0.85rem}
+
+footer{text-align:center;padding:24px 0;border-top:1px solid var(--border);color:var(--fade);font-size:0.78rem;font-family:var(--font-mono);margin-top:20px}
+</style>
+</head>
+<body>
+<header><div class="container"><a href="index.html" class="logo">◉ DASHBOARD_ANALYSIS</a><a href="index.html" class="back-btn">← Back to Portfolio</a></div></header>
+
+<div class="container">
+  <div class="doc-header">
+    <h1>SOC Dashboard — Project Analysis</h1>
+    <div class="meta">DA-2026-001 | Analyst: Guruprasad S | Date: 14 Aug 2026</div>
+  </div>
+
+  <div class="section">
+    <h2>🎯 Why I Built This</h2>
+    <p>During my BTL1 course, I kept seeing screenshots of SOC dashboards but never really understood how much work goes into making data actually readable. So I decided to build one myself — not with some fancy React framework, but with plain HTML, CSS, and Chart.js. I wanted to prove I could visualize security data without relying on tools doing all the work for me.</p>
+    <p>The goal was simple: build a dashboard that a junior analyst could look at and immediately understand what's happening in the environment.</p>
+  </div>
+
+  <div class="section">
+    <h2>🛠️ What I Used & Why</h2>
+    <ul>
+      <li><strong>HTML/CSS:</strong> I didn't want to overcomplicate things. Pure HTML/CSS gave me full control over the dark theme and grid layout.</li>
+      <li><strong>Chart.js:</strong> I tried a few libraries but Chart.js was the easiest to get good-looking charts without a steep learning curve. The doughnut chart for severity distribution was my favorite.</li>
+      <li><strong>MITRE ATT&CK Mapping:</strong> I manually mapped techniques because I wanted to show I actually understand TTPs, not just copy IDs from reports.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>⚡ Challenges I Faced</h2>
+    <p><strong>Responsive Design:</strong> Getting the grid to not break on mobile was annoying. I ended up using CSS Grid with media queries. Took me 3-4 tries to get the metric cards to stack properly on phone screens.</p>
+    <p><strong>Color Choices:</strong> I initially used bright red for everything critical but it looked too aggressive. I toned it down with softer glows and shadows so the dashboard doesn't hurt your eyes during a night shift.</p>
+    <p><strong>Real Data vs Fake Data:</strong> Since this is a portfolio piece, the data is simulated. But I made sure the numbers make sense — like having way more low alerts than critical ones, which is how real SOCs actually look.</p>
+  </div>
+
+  <div class="section">
+    <h2>📊 Key Features</h2>
+    <ul>
+      <li><strong>Live Metrics:</strong> Top cards show total alerts, critical count, high count, and auto-resolved — the first things an analyst checks during shift handover.</li>
+      <li><strong>Attack Origins Bar Chart:</strong> Shows where attacks are coming from. I used this to practice thinking like a threat intel analyst — "Why so many from Russia? Should I check GeoIP blocks?"</li>
+      <li><strong>Response Time Tracking:</strong> This was me trying to think about SOC metrics. Response time matters for SLA, so I added a line chart showing how it varies by hour.</li>
+      <li><strong>Alert Table:</strong> A scrollable table with severity badges and MITRE technique IDs. I color-coded statuses so you can spot open incidents fast.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>💡 What I Learned</h2>
+    <p>This project taught me that SOC work isn't just about tools — it's about presenting data in a way that helps humans make decisions fast. A dashboard with too much info is as bad as no dashboard.</p>
+    <p>I also learned that Chart.js config can be picky. One wrong option and your chart disappears. Debugging that made me better at reading documentation (and StackOverflow 😅).</p>
+  </div>
+
+  <div class="note">
+    <h4>📝 Note to Self</h4>
+    <p>Future improvement: Add a real-time WebSocket connection to pull live data from a SIEM API. That would make this portfolio piece actually functional in a home lab.</p>
+  </div>
+</div>
+
+<footer><div class="container">Dashboard Project Analysis | Guruprasad S | SOC Analyst Portfolio</div></footer>
+</body>
+</html>
