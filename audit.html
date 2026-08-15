@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Network Security Audit | Guruprasad S</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#030508;--panel:#080c14;--card:#0d111f;--border:#152033;--cyan:#00e5ff;--green:#00d26a;--red:#ff3860;--yellow:#ffcc00;--text:#e2e8f0;--dim:#8b95a8;--fade:#4a5568;--font-mono:'JetBrains Mono',monospace;--font-body:'Inter',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.7}
+.container{max-width:1000px;margin:0 auto;padding:0 24px}
+
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:16px 0;margin-bottom:30px}
+header .container{display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:var(--font-mono);font-weight:700;color:var(--cyan);font-size:1.1rem;text-decoration:none}
+.back-btn{color:var(--dim);text-decoration:none;font-size:0.85rem;font-family:var(--font-mono);transition:color 0.2s}
+.back-btn:hover{color:var(--cyan)}
+
+.report-header{text-align:center;margin-bottom:40px;padding:30px;background:var(--card);border:1px solid var(--border);border-radius:12px}
+.report-header h1{font-family:var(--font-mono);font-size:1.8rem;margin-bottom:8px}
+.report-header .meta{color:var(--dim);font-size:0.85rem;font-family:var(--font-mono)}
+
+.section{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:28px;margin-bottom:20px}
+.section h2{font-family:var(--font-mono);font-size:1.1rem;color:var(--cyan);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.section p{color:var(--dim);font-size:0.9rem;margin-bottom:12px}
+
+.score-ring{display:flex;justify-content:center;gap:40px;margin:24px 0}
+.score-item{text-align:center}
+.score-num{font-family:var(--font-mono);font-size:2.5rem;font-weight:800}
+.score-num.critical{color:var(--red);text-shadow:0 0 20px rgba(255,56,96,0.2)}
+.score-num.high{color:var(--yellow);text-shadow:0 0 20px rgba(255,204,0,0.15)}
+.score-num.medium{color:var(--cyan);text-shadow:0 0 20px rgba(0,229,255,0.15)}
+.score-num.low{color:var(--green);text-shadow:0 0 20px rgba(0,210,106,0.15)}
+.score-label{font-size:0.8rem;color:var(--dim);margin-top:4px}
+
+.vuln-table{width:100%;border-collapse:collapse;font-size:0.85rem;margin-top:16px}
+.vuln-table th{text-align:left;padding:10px 12px;color:var(--dim);font-family:var(--font-mono);font-size:0.72rem;text-transform:uppercase;border-bottom:1px solid var(--border)}
+.vuln-table td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--dim)}
+.vuln-table tr:hover td{color:var(--text);background:rgba(255,255,255,0.01)}
+.sev-c{color:var(--red);font-weight:600}.sev-h{color:var(--yellow);font-weight:600}.sev-m{color:var(--cyan);font-weight:600}.sev-l{color:var(--green);font-weight:600}
+
+.code-block{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:16px;font-family:var(--font-mono);font-size:0.78rem;color:var(--dim);overflow-x:auto;margin:12px 0}
+.code-block .cmd{color:var(--cyan)}.code-block .out{color:var(--dim)}.code-block .ok{color:var(--green)}.code-block .warn{color:var(--yellow)}
+
+.remedy{background:rgba(0,210,106,0.05);border:1px solid rgba(0,210,106,0.2);border-radius:8px;padding:16px;margin-top:12px}
+.remedy h4{color:var(--green);font-size:0.9rem;margin-bottom:8px}
+.remedy ul{color:var(--dim);font-size:0.85rem;margin-left:18px}
+.remedy li{margin-bottom:6px}
+
+footer{text-align:center;padding:24px 0;border-top:1px solid var(--border);color:var(--fade);font-size:0.78rem;font-family:var(--font-mono);margin-top:20px}
+</style>
+</head>
+<body>
+<header><div class="container"><a href="index.html" class="logo">◉ NETWORK_AUDIT</a><a href="index.html" class="back-btn">← Back to Portfolio</a></div></header>
+
+<div class="container">
+  <div class="report-header">
+    <h1>Network Security Audit Report</h1>
+    <div class="meta">Audit ID: NET-AUDIT-2026-001 | Auditor: Guruprasad S | Scope: 192.168.1.0/24 | Date: 14 Aug 2026</div>
+  </div>
+
+  <div class="section">
+    <h2>📊 Executive Summary</h2>
+    <p>A comprehensive network security audit was conducted on the internal corporate network (192.168.1.0/24). The assessment combined automated vulnerability scanning with manual verification to identify security weaknesses.</p>
+    <div class="score-ring">
+      <div class="score-item"><div class="score-num critical">3</div><div class="score-label">Critical</div></div>
+      <div class="score-item"><div class="score-num high">7</div><div class="score-label">High</div></div>
+      <div class="score-item"><div class="score-num medium">12</div><div class="score-label">Medium</div></div>
+      <div class="score-item"><div class="score-num low">8</div><div class="score-label">Low</div></div>
+    </div>
+    <p><strong>Overall Risk Rating:</strong> <span style="color:var(--yellow)">HIGH</span> — Immediate remediation required for critical findings.</p>
+  </div>
+
+  <div class="section">
+    <h2>🔍 Nmap Scan Results</h2>
+    <div class="code-block">
+      <span class="cmd">$ nmap -sV -sC -O 192.168.1.0/24</span><br><br>
+      <span class="out">Nmap scan report for 192.168.1.1</span><br>
+      <span class="out">Host is up (0.0023s latency).</span><br>
+      <span class="out">Not shown: 995 closed ports</span><br>
+      <span class="ok">PORT &nbsp;&nbsp;STATE SERVICE &nbsp;VERSION</span><br>
+      <span class="warn">22/tcp open &nbsp;ssh &nbsp;&nbsp;&nbsp;&nbsp;OpenSSH 7.4 (protocol 2.0)</span><br>
+      <span class="warn">80/tcp open &nbsp;http &nbsp;&nbsp;&nbsp;Apache httpd 2.4.29</span><br>
+      <span class="out">443/tcp open &nbsp;ssl/http Apache httpd 2.4.29</span><br>
+      <span class="warn">3306/tcp open mysql &nbsp;&nbsp;MySQL 5.7.33</span><br>
+      <span class="warn">3389/tcp open ms-wbt-server Microsoft Terminal Services</span><br><br>
+      <span class="out">OS details: Linux 3.10 - 4.11</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>⚠️ Vulnerability Findings</h2>
+    <table class="vuln-table">
+      <tr><th>ID</th><th>Severity</th><th>Vulnerability</th><th>Host</th><th>CVSS</th></tr>
+      <tr><td>VULN-001</td><td class="sev-c">CRITICAL</td><td>CVE-2021-44228 — Log4j RCE</td><td>192.168.1.10</td><td class="sev-c">10.0</td></tr>
+      <tr><td>VULN-002</td><td class="sev-c">CRITICAL</td><td>MySQL root — No password</td><td>192.168.1.15</td><td class="sev-c">9.8</td></tr>
+      <tr><td>VULN-003</td><td class="sev-c">CRITICAL</td><td>SMBv1 Enabled — EternalBlue</td><td>192.168.1.20</td><td class="sev-c">9.3</td></tr>
+      <tr><td>VULN-004</td><td class="sev-h">HIGH</td><td>Apache 2.4.29 — Outdated</td><td>192.168.1.1</td><td class="sev-h">7.5</td></tr>
+      <tr><td>VULN-005</td><td class="sev-h">HIGH</td><td>SSH Password Auth Enabled</td><td>192.168.1.1</td><td class="sev-h">7.0</td></tr>
+      <tr><td>VULN-006</td><td class="sev-h">HIGH</td><td>RDP Exposed to Internal</td><td>192.168.1.25</td><td class="sev-h">7.0</td></tr>
+      <tr><td>VULN-007</td><td class="sev-h">HIGH</td><td>SSL/TLS Weak Ciphers</td><td>192.168.1.1</td><td class="sev-h">6.8</td></tr>
+      <tr><td>VULN-008</td><td class="sev-h">HIGH</td><td>Unpatched Windows Server 2016</td><td>192.168.1.25</td><td class="sev-h">6.5</td></tr>
+      <tr><td>VULN-009</td><td class="sev-m">MEDIUM</td><td>SNMP Default Community</td><td>192.168.1.30</td><td class="sev-m">5.3</td></tr>
+      <tr><td>VULN-010</td><td class="sev-m">MEDIUM</td><td>Missing Security Headers</td><td>192.168.1.1</td><td class="sev-m">5.0</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>🛡️ Remediation Roadmap</h2>
+    <div class="remedy">
+      <h4>Phase 1 — Immediate (0-7 days)</h4>
+      <ul>
+        <li>Patch Log4j vulnerability (CVE-2021-44228) on 192.168.1.10</li>
+        <li>Set strong MySQL root password and restrict network access</li>
+        <li>Disable SMBv1 protocol on all Windows systems</li>
+        <li>Enable key-based SSH authentication, disable password auth</li>
+      </ul>
+    </div>
+    <div class="remedy" style="background:rgba(0,229,255,0.05);border-color:rgba(0,229,255,0.2);margin-top:12px">
+      <h4 style="color:var(--cyan)">Phase 2 — Short-term (7-30 days)</h4>
+      <ul>
+        <li>Update Apache to latest stable version (2.4.57+)</li>
+        <li>Implement network segmentation for critical assets</li>
+        <li>Deploy vulnerability management program (monthly scans)</li>
+        <li>Enable TLS 1.3, disable weak cipher suites</li>
+      </ul>
+    </div>
+    <div class="remedy" style="background:rgba(255,204,0,0.05);border-color:rgba(255,204,0,0.2);margin-top:12px">
+      <h4 style="color:var(--yellow)">Phase 3 — Long-term (30-90 days)</h4>
+      <ul>
+        <li>Deploy EDR solution across all endpoints</li>
+        <li>Implement Zero Trust network architecture</li>
+        <li>Establish continuous compliance monitoring</li>
+        <li>Conduct quarterly penetration testing</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<footer><div class="container">Network Security Audit | Guruprasad S | SOC Analyst Portfolio</div></footer>
+</body>
+</html>

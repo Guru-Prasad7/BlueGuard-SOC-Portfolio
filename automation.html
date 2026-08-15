@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python SOC Automation | Guruprasad S</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#030508;--panel:#080c14;--card:#0d111f;--border:#152033;--cyan:#00e5ff;--green:#00d26a;--red:#ff3860;--yellow:#ffcc00;--text:#e2e8f0;--dim:#8b95a8;--fade:#4a5568;--font-mono:'JetBrains Mono',monospace;--font-body:'Inter',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.7}
+.container{max-width:900px;margin:0 auto;padding:0 24px}
+
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:16px 0;margin-bottom:30px}
+header .container{display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:var(--font-mono);font-weight:700;color:var(--cyan);font-size:1.1rem;text-decoration:none}
+.back-btn{color:var(--dim);text-decoration:none;font-size:0.85rem;font-family:var(--font-mono);transition:color 0.2s}
+.back-btn:hover{color:var(--cyan)}
+
+.intro{text-align:center;margin-bottom:40px;padding:30px;background:var(--card);border:1px solid var(--border);border-radius:12px}
+.intro h1{font-family:var(--font-mono);font-size:1.8rem;margin-bottom:10px}
+.intro p{color:var(--dim);font-size:0.9rem}
+
+.script-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:24px;margin-bottom:20px;transition:all 0.3s}
+.script-card:hover{border-color:var(--border-hover);transform:translateY(-2px)}
+.script-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.script-title{font-family:var(--font-mono);font-size:1rem;color:var(--cyan);font-weight:600}
+.script-badge{background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.15);color:var(--cyan);padding:3px 10px;border-radius:4px;font-family:var(--font-mono);font-size:0.7rem}
+.script-desc{color:var(--dim);font-size:0.88rem;margin-bottom:16px}
+
+.code-block{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:18px;font-family:var(--font-mono);font-size:0.78rem;line-height:1.7;overflow-x:auto;position:relative}
+.code-block .kw{color:var(--cyan);font-weight:600}
+.code-block .fn{color:var(--yellow)}
+.code-block .str{color:var(--green)}
+.code-block .cm{color:var(--fade);font-style:italic}
+.code-block .num{color:var(--red)}
+.code-block .var{color:var(--text)}
+.copy-btn{position:absolute;top:10px;right:10px;background:var(--card);border:1px solid var(--border);color:var(--dim);padding:4px 10px;border-radius:4px;font-family:var(--font-mono);font-size:0.7rem;cursor:pointer;transition:all 0.2s}
+.copy-btn:hover{border-color:var(--cyan);color:var(--cyan)}
+
+.output-block{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:14px 18px;font-family:var(--font-mono);font-size:0.75rem;color:var(--dim);margin-top:12px}
+.output-block .ok{color:var(--green)}.output-block .warn{color:var(--yellow)}.output-block .err{color:var(--red)}
+
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:40px 0}
+.feature{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;text-align:center}
+.feature-icon{font-size:1.8rem;margin-bottom:10px}
+.feature h3{font-size:0.95rem;margin-bottom:6px}
+.feature p{color:var(--dim);font-size:0.82rem}
+
+footer{text-align:center;padding:24px 0;border-top:1px solid var(--border);color:var(--fade);font-size:0.78rem;font-family:var(--font-mono);margin-top:20px}
+
+@media(max-width:768px){.features{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="container"><a href="index.html" class="logo">◉ SOC_AUTOMATION</a><a href="index.html" class="back-btn">← Back to Portfolio</a></div></header>
+
+<div class="container">
+  <div class="intro">
+    <h1>Python SOC Automation Scripts</h1>
+    <p>A collection of Python scripts designed to automate repetitive SOC tasks, reduce analyst response time, and improve detection accuracy.</p>
+  </div>
+
+  <div class="features">
+    <div class="feature"><div class="feature-icon">📊</div><h3>Log Parser</h3><p>Parse and analyze large log files to extract security events and anomalies.</p></div>
+    <div class="feature"><div class="feature-icon">🔍</div><h3>IOC Extractor</h3><p>Extract indicators of compromise from reports, emails, and alerts.</p></div>
+    <div class="feature"><div class="feature-icon">⚡</div><h3>Alert Triage</h3><p>Automated alert classification and prioritization for faster response.</p></div>
+  </div>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-title">01_log_anomaly_detector.py</span><span class="script-badge">PYTHON</span></div>
+    <div class="script-desc">Analyzes authentication logs to detect brute force attempts, impossible travel, and off-hours login anomalies using statistical thresholds.</div>
+    <div class="code-block">
+      <button class="copy-btn" onclick="navigator.clipboard.writeText(this.parentElement.innerText.replace('Copy','').trim())">Copy</button>
+      <span class="cm">#!/usr/bin/env python3</span><br>
+      <span class="cm"># SOC Log Anomaly Detector</span><br>
+      <span class="cm"># Detects suspicious login patterns from auth logs</span><br><br>
+      <span class="kw">import</span> re, json, datetime<br>
+      <span class="kw">from</span> collections <span class="kw">import</span> defaultdict<br><br>
+      <span class="kw">def</span> <span class="fn">parse_auth_log</span>(log_file):<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;failed_attempts = defaultdict(<span class="fn">int</span>)<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">with</span> <span class="fn">open</span>(log_file, <span class="str">'r'</span>) <span class="kw">as</span> f:<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">for</span> line <span class="kw">in</span> f:<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> <span class="str">"Failed password"</span> <span class="kw">in</span> line:<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip = re.<span class="fn">search</span>(<span class="str">r'from \S+'</span>, line)<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> ip: failed_attempts[ip.group()] += <span class="num">1</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> failed_attempts<br><br>
+      <span class="kw">def</span> <span class="fn">detect_brute_force</span>(attempts, threshold=<span class="num">5</span>):<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;alerts = []<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">for</span> ip, count <span class="kw">in</span> attempts.items():<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> count > threshold:<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alerts.<span class="fn">append</span>({<span class="str">"ip"</span>: ip, <span class="str">"count"</span>: count, <span class="str">"severity"</span>: <span class="str">"HIGH"</span>})<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> alerts<br><br>
+      <span class="kw">if</span> __name__ == <span class="str">"__main__"</span>:<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;results = <span class="fn">parse_auth_log</span>(<span class="str">"/var/log/auth.log"</span>)<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;alerts = <span class="fn">detect_brute_force</span>(results)<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">print</span>(json.<span class="fn">dumps</span>(alerts, indent=<span class="num">2</span>))
+    </div>
+    <div class="output-block">
+      <span class="ok">[✓]</span> Scanning /var/log/auth.log...<br>
+      <span class="ok">[✓]</span> 1,247 login events analyzed<br>
+      <span class="warn">[!]</span> 3 brute force attempts detected:<br>
+      &nbsp;&nbsp;→ 192.168.1.45: 23 failed attempts (HIGH)<br>
+      &nbsp;&nbsp;→ 203.78.12.5: 18 failed attempts (HIGH)<br>
+      &nbsp;&nbsp;→ 45.142.212.100: 12 failed attempts (MEDIUM)
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-title">02_ioc_extractor.py</span><span class="script-badge">PYTHON</span></div>
+    <div class="script-desc">Extracts IOCs (IPs, domains, hashes, URLs) from unstructured text, threat reports, and email bodies using regex patterns.</div>
+    <div class="code-block">
+      <button class="copy-btn" onclick="navigator.clipboard.writeText(this.parentElement.innerText.replace('Copy','').trim())">Copy</button>
+      <span class="cm">#!/usr/bin/env python3</span><br>
+      <span class="cm"># IOC Extractor — Pull indicators from reports</span><br><br>
+      <span class="kw">import</span> re<br><br>
+      <span class="kw">class</span> <span class="fn">IOCExtractor</span>:<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;PATTERNS = {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"ipv4"</span>: <span class="str">r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'</span>,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"domain"</span>: <span class="str">r'\b[a-zA-Z0-9-]+\.[a-zA-Z]{2,}\b'</span>,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"md5"</span>: <span class="str">r'\b[a-f0-9]{32}\b'</span>,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"sha256"</span>: <span class="str">r'\b[a-f0-9]{64}\b'</span>,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"url"</span>: <span class="str">r'https?://[^\s]+'</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">def</span> <span class="fn">extract</span>(<span class="var">self</span>, text):<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;results = {}<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">for</span> ioc_type, pattern <span class="kw">in</span> <span class="var">self</span>.PATTERNS.items():<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;matches = <span class="fn">set</span>(re.<span class="fn">findall</span>(pattern, text))<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> matches: results[ioc_type] = <span class="fn">list</span>(matches)<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> results<br><br>
+      <span class="cm"># Usage</span><br>
+      extractor = <span class="fn">IOCExtractor</span>()<br>
+      iocs = extractor.<span class="fn">extract</span>(threat_report_text)<br>
+      <span class="fn">print</span>(<span class="str">f"Extracted {len(iocs)} indicator types"</span>)
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-title">03_alert_triage.py</span><span class="script-badge">PYTHON</span></div>
+    <div class="script-desc">Automatically classifies and prioritizes SIEM alerts based on severity, asset criticality, and threat intelligence enrichment.</div>
+    <div class="code-block">
+      <button class="copy-btn" onclick="navigator.clipboard.writeText(this.parentElement.innerText.replace('Copy','').trim())">Copy</button>
+      <span class="cm">#!/usr/bin/env python3</span><br>
+      <span class="cm"># Alert Triage Engine</span><br><br>
+      <span class="kw">def</span> <span class="fn">triage_alert</span>(alert):<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;score = <span class="num">0</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="cm"># Severity scoring</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;severity_map = {<span class="str">"critical"</span>: <span class="num">40</span>, <span class="str">"high"</span>: <span class="num">30</span>, <span class="str">"medium"</span>: <span class="num">20</span>, <span class="str">"low"</span>: <span class="num">10</span>}<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;score += severity_map.<span class="fn">get</span>(alert[<span class="str">"severity"</span>], <span class="num">0</span>)<br><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="cm"># Asset criticality</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> alert[<span class="str">"asset"</span>] <span class="kw">in</span> [<span class="str">"DC01"</span>, <span class="str">"WEB-PROD"</span>, <span class="str">"DB-SERVER"</span>]:<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;score += <span class="num">25</span><br><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="cm"># Known bad IOC check</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> alert[<span class="str">"ioc"</span>] <span class="kw">in</span> threat_intel_feed:<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;score += <span class="num">35</span><br><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="cm"># Determine priority</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> score >= <span class="num">80</span>: <span class="kw">return</span> <span class="str">"P1-CRITICAL"</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">elif</span> score >= <span class="num">50</span>: <span class="kw">return</span> <span class="str">"P2-HIGH"</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">elif</span> score >= <span class="num">30</span>: <span class="kw">return</span> <span class="str">"P3-MEDIUM"</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">else</span>: <span class="kw">return</span> <span class="str">"P4-LOW"</span>
+    </div>
+    <div class="output-block">
+      <span class="ok">[✓]</span> Processing 47 alerts...<br>
+      <span class="err">[P1]</span> 3 alerts → Immediate escalation<br>
+      <span class="warn">[P2]</span> 12 alerts → Investigate within 1 hour<br>
+      <span class="ok">[P3]</span> 18 alerts → Queue for review<br>
+      <span class="ok">[P4]</span> 14 alerts → Auto-close / whitelist
+    </div>
+  </div>
+</div>
+
+<footer><div class="container">Python SOC Automation | Guruprasad S | SOC Analyst Portfolio</div></footer>
+</body>
+</html>

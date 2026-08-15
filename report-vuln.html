@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vuln Assessment Report | Guruprasad S</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#030508;--panel:#080c14;--card:#0d111f;--border:#152033;--cyan:#00e5ff;--green:#00d26a;--red:#ff3860;--yellow:#ffcc00;--text:#e2e8f0;--dim:#8b95a8;--fade:#4a5568;--font-mono:'JetBrains Mono',monospace;--font-body:'Inter',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.7}
+.container{max-width:900px;margin:0 auto;padding:0 24px}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:16px 0;margin-bottom:30px}
+header .container{display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:var(--font-mono);font-weight:700;color:var(--cyan);font-size:1.1rem;text-decoration:none}
+.back-btn{color:var(--dim);text-decoration:none;font-size:0.85rem;font-family:var(--font-mono);transition:color 0.2s}
+.back-btn:hover{color:var(--cyan)}
+
+.doc-header{text-align:center;margin-bottom:40px;padding:30px;background:var(--card);border:1px solid var(--border);border-radius:12px;border-top:3px solid var(--yellow)}
+.doc-header h1{font-family:var(--font-mono);font-size:1.8rem;margin-bottom:8px}
+.doc-header .meta{color:var(--dim);font-size:0.85rem;font-family:var(--font-mono)}
+
+.section{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:28px;margin-bottom:20px}
+.section h2{font-family:var(--font-mono);font-size:1.05rem;color:var(--cyan);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.section p{color:var(--dim);font-size:0.9rem;margin-bottom:12px}
+
+.scores{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:20px 0}
+.score-box{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:18px;text-align:center}
+.score-box .num{font-family:var(--font-mono);font-size:2rem;font-weight:800}
+.score-box .num.c{color:var(--red);text-shadow:0 0 15px rgba(255,56,96,0.2)}
+.score-box .num.h{color:var(--yellow);text-shadow:0 0 15px rgba(255,204,0,0.15)}
+.score-box .num.m{color:var(--cyan);text-shadow:0 0 15px rgba(0,229,255,0.15)}
+.score-box .num.l{color:var(--green);text-shadow:0 0 15px rgba(0,210,106,0.15)}
+.score-box .label{font-size:0.78rem;color:var(--dim);margin-top:4px}
+
+.vuln-table{width:100%;border-collapse:collapse;font-size:0.85rem;margin-top:16px}
+.vuln-table th{text-align:left;padding:10px 12px;color:var(--dim);font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;border-bottom:1px solid var(--border)}
+.vuln-table td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--dim)}
+.vuln-table tr:hover td{color:var(--text);background:rgba(255,255,255,0.01)}
+.sev-c{color:var(--red);font-weight:600}.sev-h{color:var(--yellow);font-weight:600}.sev-m{color:var(--cyan);font-weight:600}.sev-l{color:var(--green);font-weight:600}
+
+.remedy{background:rgba(0,210,106,0.05);border:1px solid rgba(0,210,106,0.2);border-radius:8px;padding:16px;margin-top:12px}
+.remedy h4{color:var(--green);font-size:0.9rem;margin-bottom:8px}
+.remedy ul{color:var(--dim);font-size:0.85rem;margin-left:18px}
+
+footer{text-align:center;padding:24px 0;border-top:1px solid var(--border);color:var(--fade);font-size:0.78rem;font-family:var(--font-mono);margin-top:20px}
+@media(max-width:768px){.scores{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header><div class="container"><a href="index.html" class="logo">◉ VULN_REPORT</a><a href="index.html" class="back-btn">← Back to Portfolio</a></div></header>
+
+<div class="container">
+  <div class="doc-header">
+    <h1>Network Vulnerability Assessment Report</h1>
+    <div class="meta">VA-2026-001 | Assessor: Guruprasad S | Scope: 192.168.1.0/24 | Tools: Nmap, OpenVAS</div>
+  </div>
+
+  <div class="section">
+    <h2>📊 Risk Summary</h2>
+    <div class="scores">
+      <div class="score-box"><div class="num c">3</div><div class="label">Critical</div></div>
+      <div class="score-box"><div class="num h">7</div><div class="label">High</div></div>
+      <div class="score-box"><div class="num m">12</div><div class="label">Medium</div></div>
+      <div class="score-box"><div class="num l">8</div><div class="label">Low</div></div>
+    </div>
+    <p><strong>Overall Risk Score:</strong> <span style="color:var(--yellow);font-weight:700">7.8 / 10 (HIGH)</span></p>
+    <p><strong>Assessment Period:</strong> August 10-14, 2026<br>
+    <strong>Methodology:</strong> Nmap port scanning, OpenVAS vulnerability detection, manual verification</p>
+  </div>
+
+  <div class="section">
+    <h2>⚠️ Critical Findings</h2>
+    <table class="vuln-table">
+      <tr><th>CVE / Issue</th><th>Host</th><th>CVSS</th><th>Impact</th></tr>
+      <tr><td class="sev-c">CVE-2021-44228 (Log4Shell)</td><td>192.168.1.10</td><td class="sev-c">10.0</td><td>Remote Code Execution</td></tr>
+      <tr><td class="sev-c">MySQL Root No Password</td><td>192.168.1.15</td><td class="sev-c">9.8</td><td>Full Database Access</td></tr>
+      <tr><td class="sev-c">SMBv1 Enabled</td><td>192.168.1.20</td><td class="sev-c">9.3</td><td>EternalBlue Exploitation</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>🔍 OpenVAS Scan Results</h2>
+    <p>OpenVAS vulnerability scanner identified 30 vulnerabilities across the network. Key findings include outdated Apache httpd (2.4.29), missing security patches on Windows Server 2016, and weak SSL/TLS configurations.</p>
+    <table class="vuln-table">
+      <tr><th>Plugin</th><th>Severity</th><th>Host</th><th>Port</th></tr>
+      <tr><td>Apache HTTP Server < 2.4.54</td><td class="sev-h">HIGH</td><td>192.168.1.1</td><td>80/tcp</td></tr>
+      <tr><td>SSL/TLS: Deprecated TLSv1.0/TLSv1.1</td><td class="sev-h">HIGH</td><td>192.168.1.1</td><td>443/tcp</td></tr>
+      <tr><td>Microsoft Windows Unpatched</td><td class="sev-h">HIGH</td><td>192.168.1.25</td><td>3389/tcp</td></tr>
+      <tr><td>SNMP Default Community String</td><td class="sev-m">MEDIUM</td><td>192.168.1.30</td><td>161/udp</td></tr>
+      <tr><td>Missing HTTP Security Headers</td><td class="sev-m">MEDIUM</td><td>192.168.1.1</td><td>80/tcp</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>🛡️ Remediation Plan</h2>
+    <div class="remedy">
+      <h4>Priority 1 — Critical (0-48 hours)</h4>
+      <ul>
+        <li>Upgrade Log4j to version 2.17.1+ or apply vendor patches</li>
+        <li>Set strong MySQL root password and bind to localhost only</li>
+        <li>Disable SMBv1 via PowerShell: Set-SmbServerConfiguration -EnableSMB1Protocol $false</li>
+      </ul>
+    </div>
+    <div class="remedy" style="background:rgba(0,229,255,0.05);border-color:rgba(0,229,255,0.2);margin-top:12px">
+      <h4 style="color:var(--cyan)">Priority 2 — High (48 hours - 2 weeks)</h4>
+      <ul>
+        <li>Update Apache to 2.4.57 and configure security headers</li>
+        <li>Disable TLS 1.0/1.1, enable TLS 1.3 only</li>
+        <li>Apply Windows security patches (KB501...) to all servers</li>
+        <li>Replace SNMP default community strings with complex values</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<footer><div class="container">Vulnerability Assessment Report | Guruprasad S | SOC Analyst Portfolio</div></footer>
+</body>
+</html>
